@@ -4,7 +4,6 @@ const { loadBridgeData } = require('./src/bridge-utils/bridgeData');
 const { setupTray } = require('./src/app-utils/setupTray');
 const { setWindowControls } = require('./src/ipc-handlers/setWindowControls');
 const { setStaticDataHandlers } = require('./src/ipc-handlers/setStaticDataHandlers'); // prettier-ignore
-const { test } = require('./test');
 
 const ROOT_DIR = path.resolve(__dirname);
 
