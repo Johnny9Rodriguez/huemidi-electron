@@ -3,6 +3,7 @@ const { getLightGroups } = require('./static-data/getLightGroups');
 const { getLights } = require('./static-data/getLights');
 const { getScenesByGroup } = require('./static-data/getScenes');
 const { setResource } = require('./static-data/setResource');
+const { removeResource } = require('./static-data/deleteResource');
 
 const setStaticDataHandlers = () => {
     ipcMain.handle('fetch-light-groups', async () => {
@@ -20,6 +21,9 @@ const setStaticDataHandlers = () => {
             return await setResource(name, resourceID, data);
         }
     );
+    ipcMain.handle('delete-resource', async (_event, name, resourceID) => {
+        return await removeResource(name, resourceID);
+    });
 };
 
 module.exports = { setStaticDataHandlers };

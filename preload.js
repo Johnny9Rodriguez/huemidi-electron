@@ -7,7 +7,8 @@ contextBridge.exposeInMainWorld('huemidi', {
     fetchScenes: (groupID) => ipcRenderer.invoke('fetch-scenes', groupID),
     updateResource: (name, resourceID, data) =>
         ipcRenderer.invoke('update-resource', name, resourceID, data),
-
+    deleteResource: (name, resourceID) =>
+        ipcRenderer.invoke('delete-resource', name, resourceID),
     // Ambient
     // MIDI
 });
