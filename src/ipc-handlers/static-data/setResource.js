@@ -22,6 +22,8 @@ const composeColorUpdateData = (data) => {
         updateData.color = {
             xy: convertHexToXy(color.hex),
         };
+    } else if (color.xy) {
+        updateData.color = { xy: color.xy };
     }
 
     return updateData;
