@@ -25,7 +25,11 @@ const getColorPalette = (actions) => {
 
 const getScenesByGroup = async (groupID) => {
     try {
-        const scenes = await fetchResource('scene');
+        const { error, data: scenes } = await fetchResource('scene');
+
+        if (error) {
+            throw new Error(error);
+        }
 
         const data = [];
 

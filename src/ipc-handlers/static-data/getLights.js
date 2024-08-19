@@ -1,4 +1,3 @@
-const { printError } = require('../../debug-utils/printError');
 const {
     fetchResource,
     fetchResourceById,
@@ -34,7 +33,11 @@ const composeLightData = (light) => {
 
 const getAllLights = async (rids = []) => {
     const allLights = [];
-    const lights = await fetchResource('light');
+    const { error, data: lights } = await fetchResource('light');
+
+    if (error) {
+        throw new Error(error);
+    }
 
     if (!lights) {
         throw new Error('Error: Unable to fetch lights.');

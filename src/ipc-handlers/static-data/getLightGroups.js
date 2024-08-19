@@ -1,11 +1,14 @@
-const { printError } = require('../../debug-utils/printError');
 const {
     fetchResource,
     fetchResourceById,
 } = require('../../bridge-utils/bridgeResource');
 
 const getGroupedLights = async () => {
-    const groupedLights = await fetchResource('grouped_light');
+    const { error, data: groupedLights } = await fetchResource('grouped_light');
+
+    if (error) {
+        throw new Error(error);
+    }
 
     if (!groupedLights) {
         throw new Error('Error: Unable to fetch grouped lights.');
