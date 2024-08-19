@@ -15,7 +15,11 @@ const getGroupedLights = async () => {
 };
 
 const getResource = async ({ rid, rtype }) => {
-    const resource = await fetchResourceById(rtype, rid);
+    const { error, data: resource } = await fetchResourceById(rtype, rid);
+
+    if (error) {
+        throw new Error(error);
+    }
 
     if (!resource || !resource[0]) {
         throw new Error(`Error: Unable to fetch ${rtype}.`);
@@ -50,7 +54,7 @@ const getLightGroups = async () => {
         return { error: null, data: lightGroups };
     } catch (error) {
         printError(error);
-        return { error: error.message, data: null };
+        return { error, data: null };
     }
 };
 

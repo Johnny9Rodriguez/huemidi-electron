@@ -53,7 +53,11 @@ const getAllLights = async (rids = []) => {
 };
 
 const getRoomLights = async (roomID) => {
-    const room = await fetchResourceById('room', roomID);
+    const { error, data: room } = await fetchResourceById('room', roomID);
+
+    if (error) {
+        throw new Error(error);
+    }
 
     if (!room || !room[0]) {
         throw new Error('Error: Unable to fetch room.');
@@ -69,7 +73,11 @@ const getRoomLights = async (roomID) => {
 };
 
 const getZoneLights = async (zoneID) => {
-    const zone = await fetchResourceById('zone', zoneID);
+    const { error, data: zone } = await fetchResourceById('zone', zoneID);
+
+    if (error) {
+        throw new Error(error);
+    }
 
     if (!zone || !zone[0]) {
         throw new Error('Error: Unable to fetch room.');
