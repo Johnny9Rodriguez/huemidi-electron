@@ -126,7 +126,6 @@ const getLights = async (groupID, type) => {
         const data = await getLightsByType(groupID, type);
         return { error: null, data };
     } catch (error) {
-        printError(error);
         return { error: error.message, data: null };
     }
 };

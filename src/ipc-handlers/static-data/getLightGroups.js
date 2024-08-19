@@ -53,7 +53,6 @@ const getLightGroups = async () => {
 
         return { error: null, data: lightGroups };
     } catch (error) {
-        printError(error);
         return { error, data: null };
     }
 };
