@@ -25,7 +25,7 @@ const setStaticDataHandlers = () => {
     ipcMain.handle('delete-resource', async (_event, name, resourceID) => {
         return await removeResource(name, resourceID);
     });
-    ipcMain.handle('create-scene', async (_event, name, data) => {
+    ipcMain.handle('create-resource', async (_event, name, data) => {
         return await addResource(name, data);
     })
 };

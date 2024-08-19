@@ -25,7 +25,7 @@ function makeRequest(options) {
                         new Error(
                             `Request failed with status code ${res.statusCode}\n` +
                                 `${options.method} https://${options.hostname}${options.path}\n` +
-                                `Errors: ${errorMessages}`
+                                errorMessages
                         )
                     );
                 }
