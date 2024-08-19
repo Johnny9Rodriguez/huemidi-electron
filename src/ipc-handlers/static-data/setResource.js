@@ -30,14 +30,8 @@ const composeColorUpdateData = (data) => {
 };
 
 const setResource = async (name, id, data) => {
-    try {
-        const updateData = data.color ? composeColorUpdateData(data) : data;
-        await updateResource(name, id, updateData);
-        return { error: null };
-    } catch (error) {
-        printError(error);
-        return { error: error.message };
-    }
+    const updateData = data.color ? composeColorUpdateData(data) : data;
+    return updateResource(name, id, updateData);
 };
 
 module.exports = { setResource };

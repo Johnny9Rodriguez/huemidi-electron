@@ -57,10 +57,11 @@ const updateResource = async (name, id, data) => {
     };
 
     try {
-        return await makeRequest(options);
+        const data = await makeRequest(options);
+        return { error: null, data };
     } catch (error) {
         printError(error);
-        return null;
+        return { error, data: null };
     }
 };
 
