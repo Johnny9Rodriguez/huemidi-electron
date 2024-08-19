@@ -1,4 +1,3 @@
-const { printError } = require('../../debug-utils/printError');
 const { updateResource } = require('../../bridge-utils/bridgeResource');
 const { convertHexToXy } = require('../../color-utils/colorConvert');
 
