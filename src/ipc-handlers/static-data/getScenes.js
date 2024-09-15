@@ -1,6 +1,6 @@
-const { fetchResource } = require('../../bridge-utils/bridgeResource');
-const { convertXyToHex, getWhiteColor } = require('../../color-utils/colorConvert'); // prettier-ignore
-const { printError } = require('../../debug-utils/printError');
+import { fetchResource } from '../../bridge-utils/bridgeResource.js';
+import { convertXyToHex, getWhiteColor } from '../../color-utils/colorConvert.js';
+import { printError } from '../../debug-utils/printError.js';
 
 const getColorPalette = (actions) => {
     const palette = [];
@@ -54,4 +54,4 @@ const getScenesByGroup = async (groupID) => {
     }
 };
 
-module.exports = { getScenesByGroup };
+export { getScenesByGroup };

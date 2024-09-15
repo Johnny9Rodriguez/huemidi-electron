@@ -255,4 +255,4 @@ function getWhiteColor(mirek) {
     }
 }
 
-module.exports = { convertHexToXy, convertXyToHex, getWhiteColor };
+export { convertHexToXy, convertXyToHex, getWhiteColor };

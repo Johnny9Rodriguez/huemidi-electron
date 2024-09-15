@@ -1,6 +1,7 @@
 {
     "name": "huemidi-electron",
     "version": "1.0.0",
+    "type": "module",
     "main": "main.js",
     "scripts": {
         "start": "electron ."
@@ -14,6 +15,7 @@
     "dependencies": {
         "colors": "^1.4.0",
         "colorspaces": "^0.1.5",
-        "easymidi": "^3.1.0"
+        "easymidi": "^3.1.0",
+        "electron-store": "^10.0.0"
     }
 }

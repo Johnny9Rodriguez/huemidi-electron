@@ -1,8 +1,8 @@
-const {
+import {
     fetchResource,
     fetchResourceById,
-} = require('../../bridge-utils/bridgeResource');
-const { convertXyToHex } = require('../../color-utils/colorConvert');
+} from '../../bridge-utils/bridgeResource.js';
+import { convertXyToHex } from '../../color-utils/colorConvert.js';
 
 const composeLightData = (light) => {
     const id = light.id;
@@ -133,4 +133,4 @@ const getLights = async (groupID, type) => {
     }
 };
 
-module.exports = { getLights };
+export { getLights };

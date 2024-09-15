@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 let bridgeData = null;
 
@@ -19,7 +19,7 @@ const getBridgeData = () => {
     return bridgeData;
 };
 
-module.exports = {
+export {
     loadBridgeData,
     setBridgeData,
     getBridgeData,

@@ -1,6 +1,6 @@
-const { getBridgeData } = require('./bridgeData');
-const { makeRequest } = require('../utils/httpsRequest');
-const { printError } = require('../debug-utils/printError');
+import { getBridgeData } from './bridgeData.js';
+import { makeRequest } from '../utils/httpsRequest.js';
+import { printError } from '../debug-utils/printError.js';
 
 const fetchResource = async (name) => {
     const bridgeData = getBridgeData();
@@ -111,7 +111,7 @@ const deleteResource = async (name, id) => {
     }
 };
 
-module.exports = {
+export {
     fetchResource,
     fetchResourceById,
     updateResource,

@@ -1,7 +1,4 @@
-const {
-    fetchResource,
-    fetchResourceById,
-} = require('../../bridge-utils/bridgeResource');
+import { fetchResource, fetchResourceById } from '../../bridge-utils/bridgeResource.js';
 
 const getGroupedLights = async () => {
     const { error, data: groupedLights } = await fetchResource('grouped_light');
@@ -60,4 +57,4 @@ const getLightGroups = async () => {
     }
 };
 
-module.exports = { getLightGroups };
+export { getLightGroups };

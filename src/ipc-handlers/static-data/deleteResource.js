@@ -1,7 +1,7 @@
-const { deleteResource } = require('../../bridge-utils/bridgeResource');
+import { deleteResource } from '../../bridge-utils/bridgeResource.js';
 
 const removeResource = async (name, id) => {
     return await deleteResource(name, id);
 };
 
-module.exports = { removeResource };
+export { removeResource };

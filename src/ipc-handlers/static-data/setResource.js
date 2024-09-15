@@ -1,5 +1,5 @@
-const { updateResource } = require('../../bridge-utils/bridgeResource');
-const { convertHexToXy } = require('../../color-utils/colorConvert');
+import { updateResource } from '../../bridge-utils/bridgeResource.js';
+import { convertHexToXy } from '../../color-utils/colorConvert.js';
 
 /**
  * Function required because color conversion is done in main process.
@@ -33,4 +33,4 @@ const setResource = async (name, id, data) => {
     return updateResource(name, id, updateData);
 };
 
-module.exports = { setResource };
+export { setResource };

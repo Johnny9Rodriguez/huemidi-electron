@@ -1,11 +1,11 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const { loadBridgeData } = require('./src/bridge-utils/bridgeData');
-const { setupTray } = require('./src/app-utils/setupTray');
-const { setWindowControls } = require('./src/ipc-handlers/setWindowControls');
-const { setStaticDataHandlers } = require('./src/ipc-handlers/setStaticDataHandlers'); // prettier-ignore
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import { loadBridgeData } from './src/bridge-utils/bridgeData.js';
+import { setupTray } from './src/app-utils/setupTray.js';
+import { setWindowControls } from './src/ipc-handlers/setWindowControls.js';
+import { setStaticDataHandlers } from './src/ipc-handlers/setStaticDataHandlers.js';
 
-const ROOT_DIR = path.resolve(__dirname);
+const ROOT_DIR = import.meta.dirname;
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -16,7 +16,7 @@ const createWindow = () => {
         minHeight: 500,
         frame: false,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(ROOT_DIR, 'preload.js'),
         },
     });
 

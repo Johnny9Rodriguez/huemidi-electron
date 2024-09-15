@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron');
+import { ipcMain } from 'electron';
 
 const setWindowControls = (app, window) => {
     ipcMain.on('close-window', () => {
@@ -17,4 +17,4 @@ const setWindowControls = (app, window) => {
     });
 };
 
-module.exports = { setWindowControls };
+export { setWindowControls };

@@ -1,5 +1,5 @@
-const { app, Menu, Tray } = require('electron');
-const path = require('path');
+import { app, Menu, Tray } from 'electron';
+import path from 'path';
 
 let mainWindow = null;
 
@@ -37,4 +37,4 @@ const setupTray = (win) => {
     createTray(app);
 };
 
-module.exports = { setupTray };
+export { setupTray };

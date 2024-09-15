@@ -1,4 +1,4 @@
-const https = require('https');
+import https from 'https';
 
 // Makes an HTTPS request and returns a promise that resolves with the JSON parsed response data.
 function makeRequest(options) {
@@ -46,4 +46,4 @@ function makeRequest(options) {
     });
 }
 
-module.exports = { makeRequest };
+export { makeRequest };
