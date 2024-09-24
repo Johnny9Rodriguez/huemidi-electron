@@ -1,6 +1,6 @@
-import { ipcMain } from 'electron';
+import { app, ipcMain } from 'electron';
 
-const setWindowControls = (app, window) => {
+const setWindowControls = (window) => {
     ipcMain.on('close-window', () => {
         app.quit();
     });

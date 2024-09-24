@@ -1,15 +1,14 @@
 import { app, Menu, Tray } from 'electron';
 import path from 'path';
+import { ROOT_DIR } from '../../main.js';
 
 let mainWindow = null;
 
-const createTray = (app) => {
+const createTray = () => {
     let tray = null;
 
     app.whenReady().then(() => {
-        tray = new Tray(
-            path.join(__dirname, '../../public/images/tray-logo.png')
-        );
+        tray = new Tray(path.join(ROOT_DIR, 'public/images/tray-logo.png'));
 
         const contextMenu = Menu.buildFromTemplate([
             {
@@ -34,7 +33,7 @@ const onClick = () => {
 
 const setupTray = (win) => {
     mainWindow = win;
-    createTray(app);
+    createTray(ROOT_DIR);
 };
 
 export { setupTray };

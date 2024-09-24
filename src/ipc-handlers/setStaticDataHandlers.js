@@ -27,7 +27,7 @@ const setStaticDataHandlers = () => {
     });
     ipcMain.handle('create-resource', async (_event, name, data) => {
         return await addResource(name, data);
-    })
+    });
 };
 
 export { setStaticDataHandlers };

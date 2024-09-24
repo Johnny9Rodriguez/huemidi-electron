@@ -1,10 +1,10 @@
 import { app } from 'electron';
-import { boot } from './src/app-utils/bootApp.js';
+import { boot } from './src/app-utils/boot.js';
 
 const ROOT_DIR = import.meta.dirname;
 
 app.whenReady().then(async () => {
-    boot(ROOT_DIR);
+    await boot();
 });
 
 app.on('window-all-closed', () => {
@@ -14,3 +14,5 @@ app.on('window-all-closed', () => {
 
 // TODO: delete and implement SSL auth
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+export { ROOT_DIR };
