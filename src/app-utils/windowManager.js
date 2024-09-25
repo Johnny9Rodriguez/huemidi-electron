@@ -2,6 +2,7 @@ import path from 'path';
 import { BrowserWindow } from 'electron';
 import { setWindowControls } from '../ipc-handlers/setWindowControls.js';
 import { setStaticDataHandlers } from '../ipc-handlers/setStaticDataHandlers.js';
+import { setSettingsDataHandlers } from '../ipc-handlers/setSettingsDataHandlers.js';
 import {
     setSetupDataHanlders,
     unsetSetupDataHandlers,
@@ -41,8 +42,8 @@ const closeSetupWindow = () => {
 
 const createMainWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 725,
-        // width: 1000,
+        // width: 725,
+        width: 1000,
         height: 500,
         minWidth: 725,
         minHeight: 500,
@@ -53,11 +54,12 @@ const createMainWindow = () => {
     });
 
     mainWindow.loadURL('http://localhost:3000/');
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
     mainWindow.setMenuBarVisibility(false);
 
     setWindowControls(mainWindow);
     setStaticDataHandlers();
+    setSettingsDataHandlers();
 
     setupTray(mainWindow);
 

@@ -22,6 +22,9 @@ contextBridge.exposeInMainWorld('huemidi', {
         onBridgeLinked: (callback) => ipcRenderer.on('bridge-linked', callback),
         closeSetup: () => ipcRenderer.send('close-setup'),
     },
+    settings: {
+        fetchBridgeData: () => ipcRenderer.invoke('fetch-bridge-data'),
+    },
 });
 
 contextBridge.exposeInMainWorld('controls', {
