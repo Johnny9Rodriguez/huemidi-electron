@@ -1,8 +1,30 @@
 import https from 'https';
+import path from 'path';
+import fs from 'fs';
 import { setAppData } from './bridgeSetup.js';
 
+let bridgeId;
 let linking = false;
 let linkingInterval = null;
+
+const caCertPath = path.resolve(import.meta.dirname, '../../public/data/huebridge_cacert.pem'); // prettier-ignore
+const caCert = fs.readFileSync(caCertPath, 'utf8');
+
+function addCertificate(options) {
+    const requestOptions = {
+        ...options,
+        ca: caCert,
+        rejectUnauthorized: true,
+        checkServerIdentity: (_hostname, cert) => {
+            if (cert.subject.CN === bridgeId) {
+                return undefined;
+            }
+            return new Error('Certificate CN does not match device CN');
+        },
+    };
+
+    return requestOptions;
+}
 
 const fetchAppKey = (bridgeIp) => {
     const options = {
@@ -14,8 +36,10 @@ const fetchAppKey = (bridgeIp) => {
         },
     };
 
+    const requestOptions = addCertificate(options);
+
     return new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
+        const req = https.request(requestOptions, (res) => {
             let data = '';
 
             res.on('data', (chunk) => {
@@ -33,7 +57,7 @@ const fetchAppKey = (bridgeIp) => {
         });
 
         req.on('error', (error) => {
-            console.error('Error:', error.message);
+            // console.error('Error:', error.message);
             reject(error);
         });
 
@@ -75,4 +99,8 @@ const stopLinking = () => {
     }
 };
 
-export { startLinking, stopLinking };
+const setBridgeId = (id) => {
+    bridgeId = id;
+};
+
+export { startLinking, stopLinking, setBridgeId };

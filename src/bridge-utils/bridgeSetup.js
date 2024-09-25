@@ -1,8 +1,9 @@
 import dnsSd from 'node-dns-sd';
-import { store, storeBridgeData } from './bridgeData.js';
+import { storeBridgeData } from './bridgeData.js';
+import { setBridgeId } from './bridgeLink.js';
 
 let setupWindow;
-let bridge;
+let discoveredBridge;
 
 const discoverBridge = async (window) => {
     setupWindow = window;
@@ -14,9 +15,11 @@ const discoverBridge = async (window) => {
         });
 
         if (deviceList.length > 0) {
-            bridge = deviceList[0];
+            const bridge = deviceList[0];
+            discoveredBridge = getBridgeInfo(bridge);
+            setBridgeId(discoveredBridge.id);
             setupWindow.webContents.send('bridge-found', {
-                bridge,
+                bridge: discoveredBridge,
             });
         } else {
             // Bridge not found.
@@ -27,16 +30,21 @@ const discoverBridge = async (window) => {
     }
 };
 
-const name = () => {
-    const bName = bridge.packet.answers[0].name;
-    const bType = '.' + bridge.fqdn;
-    return bName.replace(bType, '');
+const getBridgeInfo = (bridge) => {
+    const answer = bridge.packet.answers.find(
+        (answer) => answer.type === 'TXT'
+    );
+
+    const bridgeName = answer.name.replace('._hue._tcp.local', '');
+    const bridgeId = answer.rdata.bridgeid;
+    const bridgeIp = bridge.address;
+
+    return { name: bridgeName, id: bridgeId, ip: bridgeIp };
 };
 
 const setAppData = (data) => {
     const bridgeData = {
-        name: name(),
-        ip: bridge.address,
+        ...discoveredBridge,
         username: data.username,
         clientkey: data.clientkey,
     };

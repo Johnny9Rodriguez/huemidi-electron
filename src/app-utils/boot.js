@@ -1,4 +1,4 @@
-import { loadBridgeData } from '../bridge-utils/bridgeData.js';
+import { verifyBridgeData } from '../bridge-utils/bridgeData.js';
 import { discoverBridge } from '../bridge-utils/bridgeSetup.js';
 import { createMainWindow, createSetupWindow } from './windowManager.js';
 
@@ -8,9 +8,9 @@ const setupBridge = () => {
 };
 
 const boot = async () => {
-    const bridgeData = await loadBridgeData();
+    const isValidBridgeData = await verifyBridgeData();
 
-    if (!bridgeData) {
+    if (!isValidBridgeData) {
         setupBridge();
     } else {
         createMainWindow();

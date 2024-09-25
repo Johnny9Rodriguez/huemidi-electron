@@ -4,10 +4,8 @@ import { makeRequest } from '../utils/httpsRequest.js';
 const store = new Store();
 let bridgeData = null;
 
-const loadBridgeData = async () => {
+const loadBridgeData = () => {
     bridgeData = store.get('bridgeData') || null;
-
-    return await verifyBridgeData();
 };
 
 const getBridgeData = () => {
@@ -39,4 +37,10 @@ const storeBridgeData = (data) => {
     store.set('bridgeData', data);
 };
 
-export { loadBridgeData, getBridgeData, storeBridgeData, store };
+export {
+    loadBridgeData,
+    verifyBridgeData,
+    getBridgeData,
+    storeBridgeData,
+    store,
+};
