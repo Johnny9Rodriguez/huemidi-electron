@@ -12,6 +12,10 @@ const getBridgeData = () => {
     return bridgeData;
 };
 
+const deleteBridgeData = () => {
+    store.set('bridgeData', null);
+};
+
 const verifyBridgeData = async () => {
     if (bridgeData === null) return false;
 
@@ -42,5 +46,6 @@ export {
     verifyBridgeData,
     getBridgeData,
     storeBridgeData,
+    deleteBridgeData,
     store,
 };

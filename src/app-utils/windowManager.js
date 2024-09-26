@@ -1,8 +1,14 @@
 import path from 'path';
 import { BrowserWindow } from 'electron';
 import { setWindowControls } from '../ipc-handlers/setWindowControls.js';
-import { setStaticDataHandlers } from '../ipc-handlers/setStaticDataHandlers.js';
-import { setSettingsDataHandlers } from '../ipc-handlers/setSettingsDataHandlers.js';
+import {
+    setStaticDataHandlers,
+    unsetStaticDataHandlers,
+} from '../ipc-handlers/setStaticDataHandlers.js';
+import {
+    setSettingsDataHandlers,
+    unsetSettingsDataHandlers,
+} from '../ipc-handlers/setSettingsDataHandlers.js';
 import {
     setSetupDataHanlders,
     unsetSetupDataHandlers,
@@ -66,4 +72,18 @@ const createMainWindow = () => {
     return mainWindow;
 };
 
-export { createSetupWindow, closeSetupWindow, createMainWindow };
+const closeMainWindow = () => {
+    if (mainWindow !== null) {
+        unsetStaticDataHandlers();
+        unsetSettingsDataHandlers();
+        mainWindow.close();
+        mainWindow = null;
+    }
+};
+
+export {
+    createSetupWindow,
+    closeSetupWindow,
+    createMainWindow,
+    closeMainWindow,
+};

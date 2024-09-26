@@ -81,8 +81,8 @@ const startLinking = async () => {
                 const appData = await fetchAppKey(ip); // username, clientkey
                 setAppData(appData);
                 stopLinking();
-            } catch (error) {
-                console.error('Failed to fetch app key:', error);
+            } catch (_error) {
+                // console.error('Failed to fetch app key:', error);
             }
         } else {
             clearInterval(linkingInterval);

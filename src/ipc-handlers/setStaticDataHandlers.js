@@ -30,4 +30,13 @@ const setStaticDataHandlers = () => {
     });
 };
 
-export { setStaticDataHandlers };
+const unsetStaticDataHandlers = () => {
+    ipcMain.removeHandler('fetch-light-groups');
+    ipcMain.removeHandler('fetch-lights');
+    ipcMain.removeHandler('fetch-scenes');
+    ipcMain.removeHandler('update-resource');
+    ipcMain.removeHandler('delete-resource');
+    ipcMain.removeHandler('create-resource');
+};
+
+export { setStaticDataHandlers, unsetStaticDataHandlers };

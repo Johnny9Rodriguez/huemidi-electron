@@ -24,6 +24,7 @@ contextBridge.exposeInMainWorld('huemidi', {
     },
     settings: {
         fetchBridgeData: () => ipcRenderer.invoke('fetch-bridge-data'),
+        forgetBridge: () => ipcRenderer.send('forget-bridge'),
     },
 });
 
