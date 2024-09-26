@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron';
 import { getBridgeData } from '../bridge-utils/bridgeData.js';
 import { forgetBridge } from '../app-utils/boot.js';
+import { store } from '../bridge-utils/bridgeData.js';
 
 const setSettingsDataHandlers = () => {
     ipcMain.handle('fetch-bridge-data', async () => {
@@ -8,6 +9,12 @@ const setSettingsDataHandlers = () => {
     });
     ipcMain.on('forget-bridge', () => {
         forgetBridge();
+    });
+    ipcMain.handle('fetch-pref-group', async () => {
+        return (await store.get('prefGroup')) || null;
+    });
+    ipcMain.on('update-pref-group', (_event, groupID) => {
+        store.set('prefGroup', groupID);
     });
 };
 

@@ -25,6 +25,9 @@ contextBridge.exposeInMainWorld('huemidi', {
     settings: {
         fetchBridgeData: () => ipcRenderer.invoke('fetch-bridge-data'),
         forgetBridge: () => ipcRenderer.send('forget-bridge'),
+        fetchPreferredGroup: () => ipcRenderer.invoke('fetch-pref-group'),
+        updatePreferredGroup: (groupID) =>
+            ipcRenderer.send('update-pref-group', groupID),
     },
 });
 

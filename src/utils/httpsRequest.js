@@ -37,26 +37,34 @@ function makeRequest(options) {
             });
 
             res.on('end', () => {
-                const parsedData = JSON.parse(data);
+                try {
+                    const parsedData = JSON.parse(data);
 
-                // On error return error messages from Hue response.
-                if (res.statusCode < 200 || res.statusCode >= 300) {
-                    let errorMessages = 'Unknown error';
-                    if (parsedData.errors && parsedData.errors.length > 0) {
-                        errorMessages = parsedData.errors
-                            .map((err) => err.description)
-                            .join(', ');
+                    // On error return error messages from Hue response.
+                    if (res.statusCode < 200 || res.statusCode >= 300) {
+                        let errorMessages = 'Unknown error';
+                        if (parsedData.errors && parsedData.errors.length > 0) {
+                            errorMessages = parsedData.errors
+                                .map((err) => err.description)
+                                .join(', ');
+                        }
+                        return reject(
+                            new Error(
+                                `Request failed with status code ${res.statusCode}\n` +
+                                    `${requestOptions.method} https://${requestOptions.hostname}${requestOptions.path}\n` +
+                                    errorMessages
+                            )
+                        );
                     }
-                    return reject(
+
+                    resolve(parsedData.data);
+                } catch (error) {
+                    reject(
                         new Error(
-                            `Request failed with status code ${res.statusCode}\n` +
-                                `${requestOptions.method} https://${requestOptions.hostname}${requestOptions.path}\n` +
-                                errorMessages
+                            `Failed to parse response as JSON: ${error.message}\nResponse data: ${data}`
                         )
                     );
                 }
-
-                resolve(parsedData.data);
             });
         });
 
