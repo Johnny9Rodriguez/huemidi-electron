@@ -21,6 +21,8 @@ const setSettingsDataHandlers = () => {
 const unsetSettingsDataHandlers = () => {
     ipcMain.removeHandler('fetch-bridge-data');
     ipcMain.removeAllListeners('forget-bridge');
+    ipcMain.removeHandler('fetch-pref-group');
+    ipcMain.removeAllListeners('update-pref-group');
 };
 
 export { setSettingsDataHandlers, unsetSettingsDataHandlers };
