@@ -4,6 +4,10 @@ import { loadBridgeData } from './src/bridge-utils/bridgeData.js';
 
 const ROOT_DIR = import.meta.dirname;
 
+const instanceLock = app.requestSingleInstanceLock();
+
+if (!instanceLock) app.quit();
+
 app.whenReady().then(async () => {
     loadBridgeData();
     await boot();

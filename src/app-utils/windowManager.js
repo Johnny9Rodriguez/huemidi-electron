@@ -28,9 +28,13 @@ const createSetupWindow = () => {
             preload: path.join(ROOT_DIR, 'preload.js'),
             devTools: false,
         },
+        icon: path.join(ROOT_DIR, 'public/images', 'logo-32.ico'),
     });
 
-    setupWindow.loadURL('http://localhost:3000/setup');
+    // setupWindow.loadURL('http://localhost:3000/setup');
+    setupWindow.loadURL(
+        `file://${path.join(ROOT_DIR, 'build', 'index.html')}#/setup`
+    );
     setupWindow.setMenuBarVisibility(false);
     setupWindow.setResizable(false);
 
@@ -67,9 +71,13 @@ const createMainWindow = () => {
             preload: path.join(ROOT_DIR, 'preload.js'),
             devTools: false,
         },
+        icon: path.join(ROOT_DIR, 'public/images', 'logo-32.ico'),
     });
 
-    mainWindow.loadURL('http://localhost:3000/');
+    // mainWindow.loadURL('http://localhost:3000/');
+    mainWindow.loadURL(
+        `file://${path.join(ROOT_DIR, 'build', 'index.html')}#/`
+    );
     // mainWindow.webContents.openDevTools();
     mainWindow.setMenuBarVisibility(false);
 
