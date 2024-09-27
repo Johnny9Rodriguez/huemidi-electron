@@ -26,11 +26,20 @@ const createSetupWindow = () => {
         frame: false,
         webPreferences: {
             preload: path.join(ROOT_DIR, 'preload.js'),
+            devTools: false,
         },
     });
 
     setupWindow.loadURL('http://localhost:3000/setup');
     setupWindow.setMenuBarVisibility(false);
+    setupWindow.setResizable(false);
+
+    // Disable reload with Ctrl + R
+    setupWindow.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toLowerCase() === 'r') {
+            event.preventDefault();
+        }
+    });
 
     setWindowControls(setupWindow);
     setSetupDataHanlders();
@@ -48,20 +57,28 @@ const closeSetupWindow = () => {
 
 const createMainWindow = () => {
     mainWindow = new BrowserWindow({
-        // width: 725,
-        width: 1000,
+        width: 725,
+        // width: 1000,
         height: 500,
         minWidth: 725,
         minHeight: 500,
         frame: false,
         webPreferences: {
             preload: path.join(ROOT_DIR, 'preload.js'),
+            devTools: false,
         },
     });
 
     mainWindow.loadURL('http://localhost:3000/');
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
     mainWindow.setMenuBarVisibility(false);
+
+    // Disable reload with Ctrl + R
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toLowerCase() === 'r') {
+            event.preventDefault();
+        }
+    });
 
     setWindowControls(mainWindow);
     setStaticDataHandlers();

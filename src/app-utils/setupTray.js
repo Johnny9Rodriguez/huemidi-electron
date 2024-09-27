@@ -8,7 +8,7 @@ const createTray = () => {
     let tray = null;
 
     app.whenReady().then(() => {
-        tray = new Tray(path.join(ROOT_DIR, 'public/images/tray-logo.png'));
+        tray = new Tray(path.join(ROOT_DIR, 'public/images/logo-32.ico'));
 
         const contextMenu = Menu.buildFromTemplate([
             {
