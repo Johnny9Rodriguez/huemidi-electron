@@ -32,6 +32,9 @@ const unsetSettingsDataHandlers = () => {
     ipcMain.removeAllListeners('forget-bridge');
     ipcMain.removeHandler('fetch-pref-group');
     ipcMain.removeAllListeners('update-pref-group');
+    ipcMain.removeAllListeners('open-github');
+    ipcMain.removeAllListeners('open-website');
+    ipcMain.removeAllListeners('open-mail');
 };
 
 export { setSettingsDataHandlers, unsetSettingsDataHandlers };
