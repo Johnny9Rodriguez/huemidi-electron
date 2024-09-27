@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, shell } from 'electron';
 import { getBridgeData } from '../bridge-utils/bridgeData.js';
 import { forgetBridge } from '../app-utils/boot.js';
 import { store } from '../bridge-utils/bridgeData.js';
@@ -15,6 +15,15 @@ const setSettingsDataHandlers = () => {
     });
     ipcMain.on('update-pref-group', (_event, groupID) => {
         store.set('prefGroup', groupID);
+    });
+    ipcMain.on('open-github', () => {
+        shell.openExternal('https://github.com/Johnny9Rodriguez');
+    });
+    ipcMain.on('open-website', () => {
+        shell.openExternal('https://joepytlik.de/');
+    });
+    ipcMain.on('open-mail', () => {
+        shell.openExternal('mailto:mail@joepytlik.de');
     });
 };
 

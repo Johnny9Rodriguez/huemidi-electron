@@ -28,6 +28,9 @@ contextBridge.exposeInMainWorld('huemidi', {
         fetchPreferredGroup: () => ipcRenderer.invoke('fetch-pref-group'),
         updatePreferredGroup: (groupID) =>
             ipcRenderer.send('update-pref-group', groupID),
+        openGithub: () => ipcRenderer.send('open-github'),
+        openWebsite: () => ipcRenderer.send('open-website'),
+        openMail: () => ipcRenderer.send('open-mail'),
     },
 });
 
