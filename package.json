@@ -62,7 +62,8 @@
                             "chooseDirectory": true
                         },
                         "shortcutFolderName": "HueMIDI",
-                        "shortcutName": "HueMIDI"
+                        "shortcutName": "HueMIDI",
+                        "icon": "./public/images/logo-64.ico"
                     }
                 }
             ]
