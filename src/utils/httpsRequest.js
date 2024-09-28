@@ -9,12 +9,14 @@ const caCert = fs.readFileSync(caCertPath, 'utf8');
 function addCertificate(options) {
     const bridgeData = getBridgeData();
 
+    const id = bridgeData.id.toLowerCase();
+
     const requestOptions = {
         ...options,
         ca: caCert,
         rejectUnauthorized: true,
         checkServerIdentity: (_hostname, cert) => {
-            if (cert.subject.CN === bridgeData.id) {
+            if (cert.subject.CN === id) {
                 return undefined;
             }
             return new Error('Certificate CN does not match device CN');

@@ -9,9 +9,11 @@ import {
     closeMainWindow,
 } from './windowManager.js';
 
+let setupWindow;
+
 const setupBridge = () => {
-    const setupWindow = createSetupWindow();
-    discoverBridge(setupWindow);
+    setupWindow = createSetupWindow();
+    discoverBridge();
 };
 
 const forgetBridge = () => {
@@ -30,4 +32,4 @@ const boot = async () => {
     }
 };
 
-export { boot, discoverBridge, forgetBridge };
+export { boot, discoverBridge, forgetBridge, setupWindow };

@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { setAppData } from './bridgeSetup.js';
 
+let bridgeIp;
 let bridgeId;
 let linking = false;
 let linkingInterval = null;
@@ -11,12 +12,15 @@ const caCertPath = path.resolve(import.meta.dirname, '../../public/data/huebridg
 const caCert = fs.readFileSync(caCertPath, 'utf8');
 
 function addCertificate(options) {
+    const id = bridgeId.toLowerCase();
+
     const requestOptions = {
         ...options,
         ca: caCert,
         rejectUnauthorized: true,
         checkServerIdentity: (_hostname, cert) => {
-            if (cert.subject.CN === bridgeId) {
+            if (cert.subject.CN === id) {
+                console.log('yo');
                 return undefined;
             }
             return new Error('Certificate CN does not match device CN');
@@ -76,7 +80,7 @@ const startLinking = async () => {
     linking = true;
     linkingInterval = setInterval(async () => {
         if (linking) {
-            const ip = '192.168.0.181';
+            const ip = bridgeIp;
             try {
                 const appData = await fetchAppKey(ip); // username, clientkey
                 setAppData(appData);
@@ -99,8 +103,12 @@ const stopLinking = () => {
     }
 };
 
+const setBridgeIp = (ip) => {
+    bridgeIp = ip;
+}
+
 const setBridgeId = (id) => {
     bridgeId = id;
 };
 
-export { startLinking, stopLinking, setBridgeId };
+export { startLinking, stopLinking, setBridgeId, setBridgeIp };

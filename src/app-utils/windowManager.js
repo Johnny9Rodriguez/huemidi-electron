@@ -31,12 +31,13 @@ const createSetupWindow = () => {
         icon: path.join(ROOT_DIR, 'public/images', 'logo-32.ico'),
     });
 
-    // setupWindow.loadURL('http://localhost:3000/setup');
+    // setupWindow.loadURL('http://localhost:3000/#/setup');
     setupWindow.loadURL(
         `file://${path.join(ROOT_DIR, 'build', 'index.html')}#/setup`
     );
     setupWindow.setMenuBarVisibility(false);
     setupWindow.setResizable(false);
+    // setupWindow.webContents.openDevTools();
 
     // Disable reload with Ctrl + R
     setupWindow.webContents.on('before-input-event', (event, input) => {
@@ -61,15 +62,15 @@ const closeSetupWindow = () => {
 
 const createMainWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 725,
-        // width: 1000,
+        // width: 725,
+        width: 1000,
         height: 500,
         minWidth: 725,
         minHeight: 500,
         frame: false,
         webPreferences: {
             preload: path.join(ROOT_DIR, 'preload.js'),
-            devTools: false,
+            // devTools: false,
         },
         icon: path.join(ROOT_DIR, 'public/images', 'logo-32.ico'),
     });
@@ -78,7 +79,7 @@ const createMainWindow = () => {
     mainWindow.loadURL(
         `file://${path.join(ROOT_DIR, 'build', 'index.html')}#/`
     );
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
     mainWindow.setMenuBarVisibility(false);
 
     // Disable reload with Ctrl + R
