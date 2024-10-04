@@ -65,18 +65,18 @@ async function fetchBridgeConfig(bridgeIp) {
 }
 
 const getBridgeInfo = async (bridge) => {
-    const answer = bridge.packet.answers.find(
-        (answer) => answer.type === 'TXT'
-    );
+    // const answer = bridge.packet.answers.find(
+    //     (answer) => answer.type === 'TXT'
+    // );
 
-    const bridgeName = answer.name.replace('._hue._tcp.local', '');
-    const bridgeId = answer.rdata.bridgeid;
-    const bridgeIp = bridge.address;
-
+    // const bridgeName = answer.name.replace('._hue._tcp.local', '');
+    // const bridgeId = answer.rdata.bridgeid;
     // const bridgeIp = bridge.address;
-    // const bridgeConfig = await fetchBridgeConfig(bridgeIp);
-    // const bridgeId = bridgeConfig.bridgeid;
-    // const bridgeName = bridgeConfig.name;
+
+    const bridgeIp = bridge.address;
+    const bridgeConfig = await fetchBridgeConfig(bridgeIp);
+    const bridgeId = bridgeConfig.bridgeid;
+    const bridgeName = bridgeConfig.name;
 
     return { name: bridgeName, id: bridgeId, ip: bridgeIp };
 };

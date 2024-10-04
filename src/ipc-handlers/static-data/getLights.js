@@ -9,7 +9,7 @@ const composeLightData = (light) => {
     const name = light.metadata.name;
     const on = light.on.on;
     const bri = light.dimming.brightness;
-    const xy = light.color.xy;
+    const xy = light.hasOwnProperty('color') ? light.color.xy : { x: 0, y: 0 };
     const mirek = light.color_temperature.mirek;
 
     const mode = mirek ? 'white' : 'rgb';
