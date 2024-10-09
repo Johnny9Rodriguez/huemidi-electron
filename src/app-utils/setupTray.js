@@ -1,4 +1,4 @@
-import { app, Menu, Tray } from 'electron';
+import { app, Menu, Tray, nativeImage } from 'electron';
 import path from 'path';
 import { ROOT_DIR } from '../../main.js';
 
@@ -8,7 +8,13 @@ const createTray = () => {
     let tray = null;
 
     app.whenReady().then(() => {
-        tray = new Tray(path.join(ROOT_DIR, 'public/images/logo-16.ico'));
+        const iconPath = path.join(ROOT_DIR, 'public/images/logo-256.png');
+        let trayIcon = nativeImage.createFromPath(iconPath);
+
+        // Resize the image to a suitable size for the tray
+        trayIcon = trayIcon.resize({ width: 16, height: 16 });
+        
+        tray = new Tray(trayIcon)
 
         const contextMenu = Menu.buildFromTemplate([
             {

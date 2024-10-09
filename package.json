@@ -31,7 +31,7 @@
     "config": {
         "forge": {
             "packagerConfig": {
-                "icon": "./public/images/logo-128.ico"
+                "icon": "./public/images/logo-256.icns"
             },
             "makers": [
                 {
@@ -48,7 +48,9 @@
                 },
                 {
                     "name": "@electron-forge/maker-deb",
-                    "config": {}
+                    "config": {
+                        "icon": "./public/images/logo-256.icns"
+                    }
                 },
                 {
                     "name": "@electron-forge/maker-rpm",
